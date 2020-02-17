@@ -1,0 +1,72 @@
+namespace dados_clase
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int dado = 0, dado1 = 0, vidas = 3, total = 0, contador1 = 0, contador6 = 0, contadord = 2;
+            Random aleatorio = new Random();
+            string continuar = "s";
+            string respuesta = "s";
+            while (continuar == "s")
+            {
+                dado = aleatorio.Next(1, 7);
+                dado1 = aleatorio.Next(1, 13);                                               
+                if (contadord != 0)
+                {                   
+                    Console.WriteLine("desea usar dado de 12 caras (s/n): ");
+                    respuesta = Console.ReadLine();                    
+                    if(respuesta =="s")
+                    {
+                        total += dado1;                       
+                        contadord -= 1;
+                    }
+                    else
+                    {
+                        total += dado;
+                    }
+                }
+                if (contadord == 0) total += dado;
+
+                if (dado == 1)
+                {
+                    total += dado;
+                    
+                    contador1 = contador1 - 1;
+                    if (contador1 == -2)
+                    {
+                        vidas -= 1;
+                        total = total - 10;
+                    }
+                }
+                else if (dado == 6)
+                {
+                    contador6 = contador6 + 1;
+
+                    if (contador6 == 2)
+                    {
+                        vidas += 1;
+                    }
+                }
+                if (vidas == 0)
+                {
+                    Console.WriteLine("perdiste");
+                    continuar = "n";
+                }
+                else if (total >= 100)
+                {
+                    Console.WriteLine("ganaste");
+                    continuar = "n";
+                }
+                else
+                {
+                    Console.WriteLine("total " + total);
+                    Console.WriteLine("su total es " + total + "puntos");
+                    Console.WriteLine("desea seguir (s/n): ");
+                    continuar = Console.ReadLine();
+                }
+            }
+
+        }
+    }
+}
